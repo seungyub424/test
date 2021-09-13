@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: caller-cm
+  namespace: nicecall
+data:
+  url: http://payment:8080

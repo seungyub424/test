@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catcher-cm
+  namespace: nicecall
+data:
+  area: kangnam,dongjak,nowon,mapo,jongro,bundang

@@ -1,0 +1,72 @@
+server:
+  port: 8080
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: caller
+          uri: http://localhost:8081
+          predicates:
+            - Path=/calls/**
+        - id: payment
+          uri: http://localhost:8082
+          predicates:
+            - Path=/payments/**
+        - id: catcher
+          uri: http://localhost:8083
+          predicates:
+            - Path=/catches/**
+        - id: dashboard
+          uri: http://localhost:8084
+          predicates:
+            - Path= /dashboards/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: caller
+          uri: http://caller:8080
+          predicates:
+            - Path=/calls/**
+        - id: payment
+          uri: http://payment:8080
+          predicates:
+            - Path=/payments/**
+        - id: catcher
+          uri: http://catcher:8080
+          predicates:
+            - Path=/catches/**
+        - id: dashboard
+          uri: http://dashboard:8080
+          predicates:
+            - Path= /dashboards/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
